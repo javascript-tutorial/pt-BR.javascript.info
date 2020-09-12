@@ -1,128 +1,122 @@
-# Browser environment, specs
+# Ambiente do Navegador, especificações
 
-The JavaScript language was initially created for web browsers. Since then, it has evolved and become a language with many uses and platforms.
+A linguagem JavaScript foi inicialmente criada para navegadores para a web. Desde então, tem evoluído e se tornado uma linguagem com muitos usuários e plataformas.
 
-A platform may be a browser, or a web-server, or a washing machine, or another *host*. Each of them provides platform-specific functionality. The JavaScript specification calls that a *host environment*.
+A plataforma pode ser um navegador, ou um servidor web, ou uma máquina de lavar, ou outro *hospedeiro* (host). Cada um deles fornece funcionalidades específicas para a plataforma. Na especificação JavaScript é conhecida como *ambiente de hospedagem* (host environment).
 
-A host environment provides platform-specific objects and functions additional to the language core. Web browsers give a means to control web pages. Node.js provides server-side features, and so on.
+Um ambente de hospedagem fornece objetos específicos para a platafoma e funções adicionais ao núcleo da linguagem. Navegadores web dão um meio paracontrolar páginas web. Node.js fornece funcionalidades para servidores (*server-side*), e assim por diante.
 
-Here's a bird's-eye view of what we have when JavaScript runs in a web-browser:
+Aqui uma visão rápida do que temos quando JavaScript roda em um navegador web:
 
 ![](windowObjects.svg)
 
-There's a "root" object called `window`. It has two roles:
+Existe um objeto "raiz" chamado `window`. Ele tem  dois papéis:
 
-1. First, it is a global object for JavaScript code, as described in the chapter <info:global-object>.
-2. Second, it represents the "browser window" and provides methods to control it.
+1. Primeiro, ele é um objeto global para o código JavaScript, como descrito no capítulo <info:global-object>.
+2. Segundo, ele representa a "janela de navegação" e fornece métodos de controle.
 
-For instance, here we use it as a global object:
+Por exemplo, nós o usamos como objeto global:
 
 ```js run
 function sayHi() {
-  alert("Hello");
+  alert("Olá");
 }
 
-// global functions are accessible as properties of window
+// funções globais sao acessíveis como propriedades de window
 window.sayHi();
 ```
 
-And here we use it as a browser window, to see the window height:
+E nós o usamos como janela de navegação, para ver a altura da janela:
 
 ```js run
-alert(window.innerHeight); // inner window height
+alert(window.innerHeight); // altura da janela interna
 ```
 
-There are more window-specific methods and properties, we'll cover them later.
+Existem mais métodos específicos de window e propriedades, vamos falar sobre eles mais tarde.
 
 ## Document Object Model (DOM)
 
-The `document` object gives access to the page content. We can change or create anything on the page using it.
+O objeto `document` da acesso ao conteúdo da página. Nós podemos mudar ou criar qualquer coisa na página usando-o.
 
-For instance:
+Por exemplo:
 ```js run
-// change the background color to red
+// mudando a cor do fundo para vermelho
 document.body.style.background = "red";
 
-// change it back after 1 second
+// mudando a cor de volta depois de 1 segundo
 setTimeout(() => document.body.style.background = "", 1000);
 ```
 
-Here we used `document.body.style`, but there's much, much more. Properties and methods are described in the specification. There happen to be two working groups who develop it:
+Aqui nós usamos `document.body.style`, mas existe muito, muito mais. Propriedades e métodos são descritos na especificação. 
+Acontece que dois grupos de trabalho a desenvolveram:
 
-1. [W3C](https://en.wikipedia.org/wiki/World_Wide_Web_Consortium) -- the documentation is at <https://www.w3.org/TR/dom>.
-2. [WhatWG](https://en.wikipedia.org/wiki/WHATWG), publishing at <https://dom.spec.whatwg.org>.
+1. [W3C](https://pt.wikipedia.org/wiki/W3C) -- a documentação está em <https://www.w3c.br/>.
+2. [WhatWG](https://pt.wikipedia.org/wiki/Web_Hypertext_Application_Technology_Working_Group), publicação em <https://dom.spec.whatwg.org>.
 
-As it happens, the two groups don't always agree, so it's like we have two sets of standards. But they are very similar and eventually things merge. The documentation that you can find on the given resources is very similar, with about a 99% match. There are very minor differences that you probably won't notice.
+Como às vezes acontece, os dois grupos nem sempre entram em concordância, então é como se nós tivessemos dois conjuntos de padrões (*standards*). Mas eles são muito parecidos e eventualmente as coisas se fundem. A documentação que você pode encontrar nos recursos dados é muito semelhante, com cerca de 99% de compatibilidade. Existem uma diferença pequena que você provavelmente não notaria.
 
-Personally, I find <https://dom.spec.whatwg.org> more pleasant to use.
+Pessoalmente, eu acho <https://dom.spec.whatwg.org> mais prazeroso de usar.
 
-In the ancient past, there was no standard at all -- each browser implemented however it wanted. Different browsers had different sets, methods, and properties for the same thing, and developers had to write different code for each of them. Dark, messy times.
+Em um passado antigo, não existia nenhum tipo de padrão -- cada navegador implementava do jeito que queria. Diferentes navegadores tinham diferentes conjuntos, métodos, e propriedades para a mesma coisa, e desenvolvedores tinham que escrever códigos diferentes para cada um deles. Tempos negros e bagunçados.
 
-Even now we can sometimes meet old code that uses browser-specific properties and works around incompatibilities. But, in this tutorial we'll use modern stuff: there's no need to learn old things until you really need to (chances are high that you won't).
+Ainda hoje nós podemos nos deparar com código antigo que usa propriedades específicas de navegador e trabalha tratando incompatibilidades. Mas, neste tutorial nós iremos usar coisas modernas: não existe necessidade de aprender coisas antigas até você realmente precisar (as chances são altas de você não precisar).
 
-Then the DOM standard appeared, in an attempt to bring everyone to an agreement. The first version was "DOM Level 1", then it was extended by DOM Level 2, then DOM Level 3, and now it's reached DOM Level 4. People from WhatWG group got tired of version numbers and are calling it just "DOM", without a number. So we'll do the same.
+Então o padrão DOM surgiu, numa tentativa de fazer com que todod mundo concordasse. A primeira versão era "DOM Level 1", e então foi estendida para DOM Level 2, depois DOM Level 3, e agora chegou a DOM Level 4. Pessoas do grupo WhatWG ficaram cansadas do número de versões e estão chamando somente "DOM", sem um número. Então vamos fazer o mesmo.
 
-```smart header="DOM is not only for browsers"
-The DOM specification explains the structure of a document and provides objects to manipulate it. There are non-browser instruments that use it too.
+```smart header="DOM não é somente para navegadores"
+A especificação DOM explica a estrutura de um documento e fornece objetos para manipulação. Existem instrumentos que não são de navegador que também usam-o.
 
-For instance, server-side tools that download HTML pages and process them use the DOM. They may support only a part of the specification though.
+Por exemplo, ferramentas para servidor (*server-side*) que fazem download e processam páginas HTML usam DOM. Contudo, elas podem ter suporte apenas para uma parte da especificação.
 ```
 
-```smart header="CSSOM for styling"
-CSS rules and stylesheets are not structured like HTML. There's a separate specification [CSSOM](https://www.w3.org/TR/cssom-1/) that explains how they are represented as objects, and how to read and write them.
+```smart header="CSSOM para estilizar"
+Regras CSS e folhas de estilo não são estruturadas como HTML. Existe  uma especificação separada [CSSOM](https://www.w3.org/TR/cssom-1/) que explica como representá-las como objetos, e como ler e escrevê-las.
 
-CSSOM is used together with DOM when we modify style rules for the document. In practice though, CSSOM is rarely required, because usually CSS rules are static. We rarely need to add/remove CSS rules from JavaScript, so we won't cover it right now.
+CSSOM é usado junto com DOM quando modificamoss regras de estilo para o documento. Na prática, CSSOM é raramente necessário, porque usualmente regras de CSS são estáticas. Raramente precisamos de adicionar/remover regras de CSS em JavaScript, então não iremos abordar isso agora.
 ```
 
-## BOM (part of HTML spec)
+## BOM (parte da especicação HTML)
 
-Browser Object Model (BOM) are additional objects provided by the browser (host environment) to work with everything except the document.
+Modelo de Objeto do Navegador (BOM) são objetos adicionais fornecidos pelo navegador (*host environment*) para trabalhar com tudo exceto o documento.
 
-For instance:
+Por exemplo:
 
-- The [navigator](mdn:api/Window/navigator) object provides background information about the browser and the operating system. There are many properties, but the two most widely known are: `navigator.userAgent` -- about the current browser, and `navigator.platform` -- about the platform (can help to differ between Windows/Linux/Mac etc).
-- The [location](mdn:api/Window/location) object allows us to read the current URL and can redirect the browser to a new one.
+- O objeto de [navigator](mdn:api/Window/navigator) fornece informações de suporte sobre o navegador e o sistema operacional. Existem muitas propriedades, mas as duas mais usadas são: `navigator.userAgent` -- sobre o navegador atual, e `navigator.platform` -- sobre a plataforma (pode ajudar a diferenciar entre Windows/Linux/Mac etc).
+- O objeto [location](mdn:api/Window/location) nos permite ler o URL atual e pode redirecionar o navegador para um novo.
 
-Here's how we can use the `location` object:
+Aqui um exemplo de como podemos usar o objeto `location`:
 
 ```js run
-alert(location.href); // shows current URL
-if (confirm("Go to wikipedia?")) {
-  location.href = "https://wikipedia.org"; // redirect the browser to another URL
+alert(location.href); // mostra o URL atual
+if (confirm("Ir para wikipedia?")) {
+  location.href = "https://wikipedia.org"; // redireciona o navegador para outro URL
 }
 ```
 
-Functions `alert/confirm/prompt` are also a part of BOM: they are directly not related to the document, but represent pure browser methods of communicating with the user.
+Funções `alert/confirm/prompt` também são parte do BOM: não são diretamente relacionadas ao documento, mas representam puros métodos do navegador para comunicação com o usuário.
 
-<<<<<<< HEAD
 
-```smart header="HTML specification"
-BOM is the part of the general [HTML specification](https://html.spec.whatwg.org).
+```smart header="especificação HTML"
+BOM é parte da [Especificação HTML](https://html.spec.whatwg.org) geral.
 
-Yes, you heard that right. The HTML spec at <https://html.spec.whatwg.org> is not only about the "HTML language" (tags, attributes), but also covers a bunch of objects, methods and browser-specific DOM extensions. That's "HTML in broad terms".
-=======
-```smart header="Specifications"
-BOM is the part of the general [HTML specification](https://html.spec.whatwg.org).
-
-Yes, you heard that right. The HTML spec at <https://html.spec.whatwg.org> is not only about the "HTML language" (tags, attributes), but also covers a bunch of objects, methods and browser-specific DOM extensions. That's "HTML in broad terms". Also, some parts have additional specs listed at <https://spec.whatwg.org>.
->>>>>>> 852ee189170d9022f67ab6d387aeae76810b5923
+Sim, voce ouviu direito. A especificação HTML em <https://html.spec.whatwg.org> não é somente sobre a "Linguagem HTML" (*tags*, atributos), mas também abrange vários objetos, métodos e específicas extensões ao DOM específicas para navegadores. Isso é "HTML em termos gerais". Também, algumas partes tem especificações adicionais listadas em <https://spec.whatwg.org>.
 ```
 
-## Summary
+## Resumo
 
-Talking about standards, we have:
+Falando sobre padrões, nós temos:
 
-DOM specification
-: Describes the document structure, manipulations and events, see <https://dom.spec.whatwg.org>.
+Especificação DOM
+: Descreve a estrutura do documento, manipulações e eventos, veja em <https://dom.spec.whatwg.org>.
 
-CSSOM specification
-: Describes stylesheets and style rules, manipulations with them and their binding to documents, see <https://www.w3.org/TR/cssom-1/>.
+Especificação CSSOM
+: Descreve folhas de estilo e regras de estilo, manipulações com elas e suas ligações a documentos, veja em <https://www.w3.org/TR/cssom-1/>.
 
-HTML specification
-: Describes the HTML language (e.g. tags) and also the BOM (browser object model) -- various browser functions: `setTimeout`, `alert`, `location` and so on, see <https://html.spec.whatwg.org>. It takes the DOM specification and extends it with many additional properties and methods.
+Especificação HTML
+: Descreve a linguagem HTML (ex. tags) e também o BOM (Modelo de Objeto do Navegador) -- várias funçoes de navegador: `setTimeout`, `alert`, `location` e assim por diante, veja em <https://html.spec.whatwg.org>. Basicamente a especificação DOM expandida com várias propriedades e métodos adicionais.
 
-Now we'll get down to learning DOM, because the document plays the central role in the UI.
+Agora iremos nos aprofundar em aprender DOM, porque a documentação tem papel principal na UI.
 
-Please note the links above, as there's so much stuff to learn it's impossible to cover and remember everything.
+Porfavor anote os links acima, como existe muita coisa para aprender é impossível abranger e lembrar de tudo.
 
-When you'd like to read about a property or a method, the Mozilla manual at <https://developer.mozilla.org/en-US/search> is a nice resource, but reading the corresponding spec may be better: it's more complex and longer to read, but will make your fundamental knowledge sound and complete.
+Quando você quiser ler sobre uma propriedade ou método, o manual da Mozilla em <https://developer.mozilla.org/en-US/search> é uma boa fonte, mas ler a espcificação correspondente pode ser melhor: é mais complexa e longo para ler, mas irá fazer seu conhecimento básico completo.
