@@ -61,18 +61,18 @@ Em outras palavras, isso:
 
 ```js
 setInterval(function () {
-  animate1()
-  animate2()
-  animate3()
+  animate1();
+  animate2();
+  animate3();
 }, 20)
 ```
 
 ...É mais leve que três referências independentes:
 
 ```js
-setInterval(animate1, 20) // animações independentes
-setInterval(animate2, 20) // em diferentes lugares do script
-setInterval(animate3, 20)
+setInterval(animate1, 20); // animações independentes
+setInterval(animate2, 20); // em diferentes lugares do script
+setInterval(animate3, 20);
 ```
 
 Esses diferentes redesenhos deveriam ser agrupados juntos, para fazer com o que o redesenho seja mais fácil para o navegador (e, portanto, mais suave para as pessoas).
@@ -110,7 +110,7 @@ O código abaixo mostra o tempo entre as 10 primeiras chamadas de `requestAnimat
   let times = 0;
 
   requestAnimationFrame(function measure(time) {
-    document.body.insertAdjacentHTML('beforeEnd', Math.floor(time - prev) + ' ');
+    document.body.insertAdjacentHTML("beforeEnd", Math.floor(time - prev) + " ");
     prev = time;
 
     if (times++ < 10) requestAnimationFrame(measure);
@@ -123,7 +123,7 @@ O código abaixo mostra o tempo entre as 10 primeiras chamadas de `requestAnimat
 Agora podemos fazer uma função de animação mais universal baseada em `requestAnimationFrame`:
 
 ```js
-function animate({ timing, draw, duration }) {
+function animate({timing, draw, duration}) {
 
   let start = performance.now();
 
@@ -191,7 +191,7 @@ O código:
 animate({
   duration: 1000,
   timing(timeFraction) {
-    return timeFraction
+    return timeFraction;
   },
   draw(progress) {
     elem.style.width = progress * 100 + '%';
@@ -331,7 +331,7 @@ Em outras palavras, temos uma função de "transformar" `makeEaseOut` que recebe
 ```js
 // aceita a função de tempo, returna a variante transformada
 function makeEaseOut(timing) {
-  return function (timeFraction) {
+  return function(timeFraction) {
     return 1 - timing(1 - timeFraction);
   }
 }
@@ -376,7 +376,7 @@ O código do wrapper:
 
 ```js
 function makeEaseInOut(timing) {
-  return function (timeFraction) {
+  return function(timeFraction) {
     if (timeFraction < 0.5) 
       return timing(2 * timeFraction) / 2;
     else
@@ -397,9 +397,9 @@ O efeito é claramente visto se compararmos os gráficos de `easeIn`, `easeOut` 
 
 ![](circ-ease.svg)
 
-- <span style="color:#EE6B47">Vermelha</span> é a variante regular de `circ` (`easeIn`).
-- <span style="color:#8DB173">Verde</span> -- `easeOut`.
-- <span style="color:#62C0DC">Azul</span> -- `easeInOut`.
+- <span style="color:#EE6B47">Red</span> é a variante regular de `circ` (`easeIn`).
+- <span style="color:#8DB173">Greed</span> -- `easeOut`.
+- <span style="color:#62C0DC">Blue</span> -- `easeInOut`.
 
 Como podemos ver, o gráfico da primeira metade da animação é a reduzida `easeIn`, e a segunda metade é a reduzida `easeOut`. Como resultado, a animação começa e termina com o mesmo efeito.
 
@@ -420,7 +420,7 @@ Quando uma página está em segundo plano, não ocorrem repinturas, então a cal
 Aqui está a função helper `animate` para configura a maioria das animações:
 
 ```js
-function animate({ timing, draw, duration }) {
+function animate({timing, draw, duration}) {
 
   let start = performance.now();
 
