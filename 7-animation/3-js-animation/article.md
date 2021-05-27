@@ -178,6 +178,7 @@ Função `animate` aceita 3 parâmetros que essencialmente descrevem a animaçã
 
     ...Ou fazer qualquer outra coisa, podemos animar qualquer coisa, de qualquer jeito.
 
+
 Vamos animar o elemento `width` de `0` a `100%` usando nossa função.
 
 Clique no elemento para a demo:
