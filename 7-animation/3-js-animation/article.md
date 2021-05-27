@@ -91,7 +91,6 @@ Isso agenda a função `callback` para ser executado no momento mais próximo qu
 Se modificarmos os elementos na `callback`, então eles serão agrupados juntos com outras `requestAnimationFrame` callbacks e com animações em CSS. Então haverá apenas um recálculo geométrico e repintura ao invés de várias.
 
 O valor retornado `requesId` pode ser utilizado para cancelar a chamada:
-
 ```js
 // cancela a execução agendada da callback
 cancelAnimationFrame(requestId)
