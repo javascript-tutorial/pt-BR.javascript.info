@@ -8,7 +8,7 @@ Por exemplo, movimentação por um caminho complexo, com uma função de tempo d
 
 A animação pode ser implementada como uma sequência de frames (quadros) -- geralmente pequenas modificações nas propriedades de HTML/CSS.
 
-Por exemplo, modificando `style.left` de `0px` para `100px` movimenta o elemento. E se aumentarmos em `setInterval`, mudando por `2px` com um pequeno atraso, como 50 vezes por segundo, parecerá suave. Este é o mesmo princípio do cinema: 24 quadros por segundo é o suficiente para fazer com que pareça suave.
+Por exemplo, modificando `style.left` de `0px` para `100px` move o elemento. E se aumentarmos em `setInterval`, mudando por `2px` com um pequeno atraso, como 50 vezes por segundo, parecerá suave. Este é o mesmo princípio do cinema: 24 quadros por segundo é o suficiente para fazer com que pareça suave.
 
 O pseudo-código pode ficar assim:
 
