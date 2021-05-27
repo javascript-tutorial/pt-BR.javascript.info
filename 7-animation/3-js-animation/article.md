@@ -82,7 +82,6 @@ Tem mais uma coisa a ser manter em mente. Às vezes, quando a CPU está sobrecar
 Mas como sabemos disso em JavaScript? Existe uma especificação [Tempo de animação](http://www.w3.org/TR/animation-timing/) que fornece a função `requestAnimationFrame`. Ela aborda todos esses problemas e mais.
 
 A sintaxe:
-
 ```js
 let requestId = requestAnimationFrame(callback)
 ```
