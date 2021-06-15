@@ -417,7 +417,7 @@ Para animação que CSS não lida bem, ou aquelas que precisam de controle rígi
 
 Quando uma página está em segundo plano, não ocorrem repinturas, então a callback não será executada: a animação será suspensa e não consumirá recursos. Isso é ótimo.
 
-Aqui está a função helper `animate` para configura a maioria das animações:
+Aqui está uma função de ajuda `animate` para configurar a maioria das animações:
 
 ```js
 function animate({timing, draw, duration}) {
